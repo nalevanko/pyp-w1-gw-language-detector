@@ -10,7 +10,7 @@ def get_word_count(text, list_of_words):
     text_l = text.split()
     
     for word in text_l:
-        if word in list_of_words:
+        if word.lower() in list_of_words:
             count += 1
             
     return count
@@ -24,10 +24,20 @@ def detect_language(text, LANGUAGES):
     for language in LANGUAGES:
         
         result = get_word_count(text, language['common_words'])
-        #print(result)
+        print(result)
+        #import pdb; pdb.set_trace()
         if result > word_count:
             lang = language['name']
+            word_count = result
             
     return lang
 
-#print(detect_language('ich bin du bist sie ist zu', LANGUAGES))
+print(detect_language('''Lionel Andrés Messi Cuccittini (Rosario, 24 de junio de 1987),
+            conocido como Leo Messi, es un futbolista argentino11 que juega
+            como delantero en el Fútbol Club Barcelona y en la selección
+            argentina, de la que es capitán. Considerado con frecuencia el
+            mejor jugador del mundo y calificado en el ámbito deportivo como el
+            más grande de todos los tiempos, Messi es el único futbolista en la
+            historia que ha ganado cinco veces el FIFA Balón de Oro –cuatro de
+            ellos en forma consecutiva– y el primero en
+            recibir tres Botas de Oro.''', LANGUAGES))
